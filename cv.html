@@ -34,54 +34,54 @@
                 </ul>
             </div>
         </div>
+        <script>
+            let paragraphs = ['home','mail']; 
+            var translation = {
+            "en" : {
+                "home" : "<a href='/index.html'>Home</a>",
+                "p1" : "Hi there, I'm glad you found me! My name's Christian. I hold a Bsc in Geography from Münster University, am a Msc student in Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), and I'm passionate about everything around GIS. I have experience in ArcGIS and QGIS desktop environments, the Python geospatial stack (Geopandas, libpysal, shapely, folium, pyproj, as well as the usual data science libraries), spatial databases (specifically PostGIS), as well as R and web mapping. If you want to know more, check out my CV.",
+                "p2" : "Next to my studies, I am functioning as the external committee chair of <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, the Msc GIMA student association, and I am currently also working as the GIMA secretary at Utrecht University, so if you're curious about my Master's programme, contact me <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>here</span></a>.",
+                "p3" : "My personal interests include environmentalism (I'm a geographer by training, after all), science & technology, European and US politics, as well as Spanish & South American culture and US popular culture. I also occasionally make music with my band, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
+                "mail" : "<a href='mailto:c.beiwinkel@uu.nl'>mail</a>"
+            },
+            "es" : {
+                    "home" : "<a href='/index.html'>Inicio</a>",
+                    "p1" : "Hola, soy Christian! Tengo un Bsc en Geografía de la Universidad de Münster, soy estudiante del programa Msc Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), y soy profesional de sistemas de información geográfica. Tengo experienca en  ArcGIS y QGIS, librerías geográficas de Python (Geopandas, libpysal, shapely, folium, pyproj, y las librerías usuales de analisis, gestión y visualización de datos), bases de datos geográficas (específicamente PostGIS), R y mapas web. Se puede encontrar más información en mi CV.",
+                    "p2" : "Aparte de mis estudios, soy el presidente del comité externo de <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, la asociación de estudiantes del programa Msc GIMA, y de momento soy el secretario de GIMA en la Universidad de Utrecht, así que si tiene alguna pregunta sobre el programa, contáctenme <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>aquí</span></a>.",
+                    "p3" : "Mis intereses personales incluyen ambientalismo, ciencia y tecnología, política europea y estadounidense, y cultura española y latinoamericana. Además toco música cada vez en cuando con mi banda, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
+                    "mail": "<a href='mailto:c.beiwinkel@uu.nl'>correo</a>"
+                },
+            "de" : {
+                    "home" : "<a href='/index.html'>Start</a>",
+                    "p1" : "Hi, schön dass du mich gefunden hast! Ich bin Christian. Ich habe meinen Bsc Geographie in Münster absolviert, bin nun Msc Student in Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), und ich bin enthusiastisch über alles was mit GIS zu tun hat. Ich habe Erfahrung in ArcGIS and QGIS Desktopumgebungen, dem Python geospatial stack (Geopandas, libpysal, shapely, folium, pyproj, und die üblichen data science Bibliotheken), räumliche Datenbanken (vor allem PostGIS), genau so wie R und web mapping. Mehr Informationen dazu in meinem CV.",
+                    "p2" : "Abseits des Studiums bin ich Vorsitzender des externen Kommittees von <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, der Fachschaft unseres Masters, und zur Zeit bin ich als Sekretär unseres Masterstudiengangs an der Universität Utrecht tätig. Fragen über den Studiengang können daher via <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>mail</span></a> an mich gerchtet werden.",
+                    "p3" : "Meine persönlichen Interessen sind Umweltschutz, Wissenschaft und Technologie, EU- und US-amerikanische Politik, sowie spanische und südamerikanische Kultur und US-amerikanische Popkultur. Außerdem mache ich gelegentlich Musik mit meiner Band, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
+                    "mail" : "<a href='mailto:c.beiwinkel@uu.nl'>mail</a>"
+            }
+        };
+            function getLanguage() {
+                if (localStorage.getItem('language')==null) {
+                    setLanguage('en')
+                } else {
+                    for (let i = 0; i < paragraphs.length; i++) {
+                    document.getElementById(paragraphs[i]).innerHTML = translation[localStorage.getItem('language')][paragraphs[i]]
+                    }
+                }
+            }
+    
+            function setLanguage(lang) {
+                localStorage.setItem('language', lang)
+                for (let i = 0; i < paragraphs.length; i++) {
+                    document.getElementById(paragraphs[i]).innerHTML = translation[localStorage.getItem('language')][paragraphs[i]]
+                }
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                    getLanguage();
+                }, false);
+        </script>
         <div id="welcome">
             <iframe src="/assets/Beiwinkel_CV.pdf" width="800px" height="600px" style="border: none;" />
         </div>
     </div>
-    <script>
-        let paragraphs = ['home','mail']; 
-        var translation = {
-        "en" : {
-            "home" : "<a href='/index.html'>Home</a>",
-            "p1" : "Hi there, I'm glad you found me! My name's Christian. I hold a Bsc in Geography from Münster University, am a Msc student in Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), and I'm passionate about everything around GIS. I have experience in ArcGIS and QGIS desktop environments, the Python geospatial stack (Geopandas, libpysal, shapely, folium, pyproj, as well as the usual data science libraries), spatial databases (specifically PostGIS), as well as R and web mapping. If you want to know more, check out my CV.",
-            "p2" : "Next to my studies, I am functioning as the external committee chair of <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, the Msc GIMA student association, and I am currently also working as the GIMA secretary at Utrecht University, so if you're curious about my Master's programme, contact me <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>here</span></a>.",
-            "p3" : "My personal interests include environmentalism (I'm a geographer by training, after all), science & technology, European and US politics, as well as Spanish & South American culture and US popular culture. I also occasionally make music with my band, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
-            "mail" : "<a href='mailto:c.beiwinkel@uu.nl'>mail</a>"
-        },
-        "es" : {
-                "home" : "<a href='/index.html'>Inicio</a>",
-                "p1" : "Hola, soy Christian! Tengo un Bsc en Geografía de la Universidad de Münster, soy estudiante del programa Msc Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), y soy profesional de sistemas de información geográfica. Tengo experienca en  ArcGIS y QGIS, librerías geográficas de Python (Geopandas, libpysal, shapely, folium, pyproj, y las librerías usuales de analisis, gestión y visualización de datos), bases de datos geográficas (específicamente PostGIS), R y mapas web. Se puede encontrar más información en mi CV.",
-                "p2" : "Aparte de mis estudios, soy el presidente del comité externo de <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, la asociación de estudiantes del programa Msc GIMA, y de momento soy el secretario de GIMA en la Universidad de Utrecht, así que si tiene alguna pregunta sobre el programa, contáctenme <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>aquí</span></a>.",
-                "p3" : "Mis intereses personales incluyen ambientalismo, ciencia y tecnología, política europea y estadounidense, y cultura española y latinoamericana. Además toco música cada vez en cuando con mi banda, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
-                "mail": "<a href='mailto:c.beiwinkel@uu.nl'>correo</a>"
-            },
-        "de" : {
-                "home" : "<a href='/index.html'>Start</a>",
-                "p1" : "Hi, schön dass du mich gefunden hast! Ich bin Christian. Ich habe meinen Bsc Geographie in Münster absolviert, bin nun Msc Student in Geographical Information Management & Applications (<a href='https://www.uu.nl/masters/en/geographical-information-management-and-applications-gima'><span class='textlink'>GIMA</span></a>), und ich bin enthusiastisch über alles was mit GIS zu tun hat. Ich habe Erfahrung in ArcGIS and QGIS Desktopumgebungen, dem Python geospatial stack (Geopandas, libpysal, shapely, folium, pyproj, und die üblichen data science Bibliotheken), räumliche Datenbanken (vor allem PostGIS), genau so wie R und web mapping. Mehr Informationen dazu in meinem CV.",
-                "p2" : "Abseits des Studiums bin ich Vorsitzender des externen Kommittees von <a href='http://www.gima-node.nl'><span class='textlink'>NODE</span></a>, der Fachschaft unseres Masters, und zur Zeit bin ich als Sekretär unseres Masterstudiengangs an der Universität Utrecht tätig. Fragen über den Studiengang können daher via <a class='textlink' href='mailto:gima.geo@uu.nl'><span class='textlink'>mail</span></a> an mich gerchtet werden.",
-                "p3" : "Meine persönlichen Interessen sind Umweltschutz, Wissenschaft und Technologie, EU- und US-amerikanische Politik, sowie spanische und südamerikanische Kultur und US-amerikanische Popkultur. Außerdem mache ich gelegentlich Musik mit meiner Band, <a class='textlink' href='https://www.instagram.com/wearemanjaro/'><span class='textlink'>Manjaro</span></a>.",
-                "mail" : "<a href='mailto:c.beiwinkel@uu.nl'>mail</a>"
-        }
-    };
-        function getLanguage() {
-            if (localStorage.getItem('language')==null) {
-                setLanguage('en')
-            } else {
-                for (let i = 0; i < paragraphs.length; i++) {
-                document.getElementById(paragraphs[i]).innerHTML = translation[localStorage.getItem('language')][paragraphs[i]]
-                }
-            }
-        }
-
-        function setLanguage(lang) {
-            localStorage.setItem('language', lang)
-            for (let i = 0; i < paragraphs.length; i++) {
-                document.getElementById(paragraphs[i]).innerHTML = translation[localStorage.getItem('language')][paragraphs[i]]
-            }
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-                getLanguage();
-            }, false);
-    </script>
 </body>
 </html>
