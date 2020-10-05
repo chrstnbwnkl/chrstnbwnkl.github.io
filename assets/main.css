@@ -1,0 +1,149 @@
+@font-face {
+    font-family: OxygenMono;
+    src: url("/assets/fonts/OxygenMono-Regular.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: OxygenMono;
+    background-color: rgb(247, 247, 247);
+}
+
+@media screen and (min-width: 401px) {
+    body {
+      font-size: 1em;
+    }
+    #navbar {
+        width: 50%;
+    }
+    #langbar {
+        left: 50%;
+        width: 50%;
+    }
+    ul.nav li, ul.lang li {
+        float: left;
+        margin-left: 5%;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    body {
+      font-size: 1.1em;
+    }
+    #navbar {
+        width: 70%;
+    }
+    #langbar {
+        left: 70%;
+        width: 30%;
+    }
+    ul.nav li, ul.lang li {
+        float: left;
+        margin-left: 7%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    body {
+      font-size: 0.7em;
+    }
+    #navbar {
+        width: 50%;
+    }
+    #langbar {
+        left: 50%;
+        width: 50%;
+    }
+    ul.nav li, ul.lang li {
+        float: left;
+        margin-left: 4%;
+    }
+}
+  
+
+a:any-link {
+    color: black;
+    text-decoration: none;
+}
+
+#topwrap {
+    width: 100%;
+    overflow: hidden;
+}
+#navbar {
+    position: fixed;
+    top: 0px;
+    /* width: 50%; */
+    height: 10%;
+}
+#langbar {
+    position: fixed;
+    top: 0px;
+    /* left: 50%;
+    width: 50%; */
+    height: 10%;
+}
+ul.nav {
+    list-style-type: none;
+}
+ul.lang {
+    list-style-type: none;
+}
+
+ul.nav li, ul.lang li {
+    float: left;
+    /* margin-left: 5%; */
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-color: red;
+}
+
+#content { 
+    margin: 10% 0px 0px 5%;
+}
+
+#profile-pic {
+    width: 100%;
+    border-radius: 50%;
+}
+div.contact {
+    margin-top: 15%;
+}
+ul.contact {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+ul.contact li {
+    margin-top: 10px;
+}
+
+#sidebar {
+    width: 10%;
+    float: left;
+    margin-right: 5%;
+    font-size: 0.8em;
+}
+
+#welcome {
+    float: left;
+    width: 80%;
+}
+
+.pic {
+    margin-top: 10%;
+}
+
+span.textlink {
+    color: rgb(248, 41, 41);
+}
+
+a:active {
+    text-decoration-color: red;
+    text-decoration: underline;
+}
