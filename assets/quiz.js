@@ -1,8 +1,5 @@
-// var width = 0.4*window.screen.width,
-//     height = 1.3*width;
-
-var width = 0.3*window.screen.width,
-    height = 1.2*width;
+var width = 384,
+    height = 460.8;
 
 // var projection = d3.geo.mercator().scale(width).center([10.4515, 51.1657]);
 
