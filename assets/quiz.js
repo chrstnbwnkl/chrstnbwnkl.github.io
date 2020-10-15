@@ -2,7 +2,10 @@ var width = 384,
     height = 460.8;
 
 // var projection = d3.geo.mercator().scale(width).center([10.4515, 51.1657]);
-
+const tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .offset([-10, 0])
+  .html(d => `<span class='details'>${d.properties.NAME}<br></span>`);
 
 var svg = d3.select("#map").append("svg")
     .attr("width", width)
@@ -12,6 +15,7 @@ var svg = d3.select("#map").append("svg")
 
 var thedatarr = thedata.objects.KFZ_d3.geometries;
 
+svg.call(tip);
 
 kfz_topo = '/assets/KFZ_d3_s.json'
 d3.json(kfz_topo, function(error, topology) {
@@ -24,7 +28,21 @@ d3.json(kfz_topo, function(error, topology) {
       .data(geojson.features)
       .enter().append("path")
       .attr("d", path)
-      .attr("id", function(d, i) { return geojson.features[i].properties.DEBKGID });
+      .attr("id", function(d, i) { return geojson.features[i].properties.DEBKGID })
+      .on('mouseover',function(d){
+        if (d3.select(this).classed('guessed')) {
+            tip.show(d);
+            d3.select(this)
+            .style('stroke-width', 3);
+        }
+      })
+      .on('mouseout', function(d){
+        if (d3.select(this).classed('guessed')) {
+        tip.hide(d);
+        d3.select(this)
+          .style('stroke-width',0.3);
+        }
+        });
 
   console.log(geojson.type);
   console.log(path.bounds(geojson))
@@ -45,8 +63,8 @@ var score = [];
 input = document.getElementById("user-input");
 input.addEventListener('submit', function(e) {
         e.preventDefault();
-        kfz_input = d3.select("#KFZ-input").node().value;
-        name_input = d3.select("#Kreis-input").node().value;
+        kfz_input = d3.select("#KFZ-input").node().value.toLowerCase().trim();
+        name_input = d3.select("#Kreis-input").node().value.toLowerCase().trim();
         d3.select("#KFZ-input").node().value = '';
         d3.select("#Kreis-input").node().value = '';
         if (inputRepeated(kfz_input, name_input)) {
@@ -78,7 +96,7 @@ function inputRepeated(kfz, kreis) {
 
 //Look for user input in kfz data and return ID if exists
 function inputinData(kfz, name, quiz_data) {
-    var result = quiz_data.find(feature => feature.properties.NAME === name && feature.properties.KFZ.includes(kfz));
+    var result = quiz_data.find(feature => feature.properties.NAME.toString().toLowerCase() === name && feature.properties.KFZ.toString().toLowerCase().includes(kfz));
     var scoreNode = document.getElementById("scoreCount");
     if (result) {
         updateScore(scoreNode, result);
@@ -98,33 +116,3 @@ function updateScore(node, result) {
     score.push(`${result.properties.KFZ}  ${result.properties.NAME}`);
     node.innerHTML = `Erratene Kombinationen: ${score.length}<br>(${Math.round((score.length/770*100)*100)/100}%)`
 }
-
-function calculateScaleCenter(features) {
-    // Get the bounding box of the paths (in pixels!) and calculate a
-    // scale factor based on the size of the bounding box and the map
-    // size.
-    var bbox_path = path.bounds(features),
-        scale = 0.95 / Math.max(
-          (bbox_path[1][0] - bbox_path[0][0]) / width,
-          (bbox_path[1][1] - bbox_path[0][1]) / height
-        );
-  
-    // Get the bounding box of the features (in map units!) and use it
-    // to calculate the center of the features.
-    var bbox_feature = d3.geo.bounds(features),
-        center = [
-          (bbox_feature[1][0] + bbox_feature[0][0]) / 2,
-          (bbox_feature[1][1] + bbox_feature[0][1]) / 2];
-  
-    return {
-      'scale': scale,
-      'center': center
-    };
-  }
-
-var laenge = 0;
-for (i=0;i<thedatarr.length;i++) {
-    laenge += thedatarr[i].properties.KFZ.length;
-    console.log(laenge);
-}
-console.log("Ende");

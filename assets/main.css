@@ -144,7 +144,7 @@ span.textlink {
 }
 
 a:active {
-    text-decoration-color: red;
+    text-decoration-color: rgb(248, 41, 41);
     text-decoration: underline;
 }
 
@@ -177,4 +177,13 @@ a:active {
 #expl {
     float: left;
     text-align: left;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 6px;
+    background: rgba(59, 56, 56, 0.6);
+    color: rgb(241, 241, 241);
+    border-radius: 1px;
+    pointer-events: none;
 }
