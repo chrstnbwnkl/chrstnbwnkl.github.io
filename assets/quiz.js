@@ -1,8 +1,7 @@
 var width = 384,
     height = 460.8;
 
-// var projection = d3.geo.mercator().scale(width).center([10.4515, 51.1657]);
-const tip = d3.tip()
+    const tip = d3.tip()
   .attr('class', 'd3-tip')
   .offset([-10, 0])
   .html(d => `<span class='details'>${d.properties.NAME}<br></span>`);
@@ -21,7 +20,6 @@ kfz_topo = '/assets/KFZ_d3_s.json'
 d3.json(kfz_topo, function(error, topology) {
   if (error) throw error;
   geojson = topojson.feature(topology, topology.objects.KFZ_d3);
-//   var projection = d3.geoConicConformal().parallels([7, 15]).center([0.4515, 40.1657]).fitSize([width, height], geojson).scale(3000)
   var projection = d3.geo.mercator().scale(5500).center([8.9, 48.3]).translate([width/1.3, height/0.639]);
   var path = d3.geo.path().projection(projection);
   svg.selectAll("path")
@@ -43,23 +41,13 @@ d3.json(kfz_topo, function(error, topology) {
           .style('stroke-width',0.3);
         }
         });
-
-  console.log(geojson.type);
-  console.log(path.bounds(geojson))
 });
 
-// Track user input
+// Track user input & score
 var userinput = new Array();
-var score = [];
+var score = new Array();
 
-// Start quiz
-// var quiz_head = document.getElementById("quiz-head");
-// var start_btn = document.getElementById("stbtn");
-// start_btn.addEventListener("click", function(e) {
-//     var time_div = document.createElement("div").classList.add('timer');   
-// })
-
-// Get input
+// Get and evaluate input
 input = document.getElementById("user-input");
 input.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -82,8 +70,6 @@ input.addEventListener('submit', function(e) {
         }
     });
 
-
-
 // Check if input repeated
 function inputRepeated(kfz, kreis) {
     if (userinput.includes(`${kfz} ${kreis}`)) {
@@ -94,7 +80,7 @@ function inputRepeated(kfz, kreis) {
     }
 }
 
-//Look for user input in kfz data and return ID if exists
+// Look for user input in kfz data and return ID if exists
 function inputinData(kfz, name, quiz_data) {
     var result = quiz_data.find(feature => feature.properties.NAME.toString().toLowerCase() === name && feature.properties.KFZ.toString().toLowerCase().includes(kfz));
     var scoreNode = document.getElementById("scoreCount");
@@ -105,12 +91,14 @@ function inputinData(kfz, name, quiz_data) {
         return false }
 }
 
+// Animate input boxes
 function errorShake(node) {
     node.classList.add('error');
     setTimeout(function() {
         node.classList.remove('error');
     }, 300);
 }
+
 
 function updateScore(node, result) {
     score.push(`${result.properties.KFZ}  ${result.properties.NAME}`);
