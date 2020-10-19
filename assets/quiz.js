@@ -9,8 +9,6 @@ var width = 384,
 var svg = d3.select("#map").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("viewBox", "0 0 960 500")
-    .attr("preserveAspectRatio", "xMidYMid meet");
 
 var thedatarr = thedata.objects.KFZ_d3.geometries;
 
@@ -20,8 +18,16 @@ kfz_topo = '/assets/KFZ_d3_s.json'
 d3.json(kfz_topo, function(error, topology) {
   if (error) throw error;
   geojson = topojson.feature(topology, topology.objects.KFZ_d3);
-  var projection = d3.geo.mercator().scale(5500).center([8.9, 48.3]).translate([width/1.3, height/0.639]);
-  var path = d3.geo.path().projection(projection);
+//   var projection = d3.geo.mercator().scale(2100).center([11.1, 51.35]).translate([width/2, height/2]);
+  var projection = d3.geoAlbers()
+    .rotate([-10.0, 0.0, 0])
+    .center([0.0, 51.1])
+    .parallels([47.0, 55.0])
+    .translate([width / 2, height / 2])
+    .scale(3250)
+    .precision(.1);
+
+var path = d3.geo.path().projection(projection);
   svg.selectAll("path")
       .data(geojson.features)
       .enter().append("path")
