@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="manjaro.css">
+    <link rel="stylesheet" href="assets/manjaro.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@3/dist/inspector.css">
     <title>Manjaro 2000</title>
 </head>
@@ -19,21 +19,34 @@
         
         // Your notebook, compiled as an ES module.
         import notebook from "https://api.observablehq.com/d/587cab2dfeaf3511.js?v=3";
+
+        // Change style and page runtimes at once
+        function update(cell, value) {
+            main.redefine(cell, value);
+            style.redefine(cell, value);}
         
         // Load the notebook, observing its cells with a default Inspector
         // that simply renders the value of each cell into the provided DOM node.
-        new Runtime(
+        const main = new Runtime(
             //Object.assign(new Library(), {width: 954})
             ).module(notebook, name => {
             if (name === "page") {
                 return new Inspector(document.querySelector(".page"));
                 }
             });
-        new Runtime().module(notebook, name => {
+        const style = new Runtime().module(notebook, name => {
             if (name === "style") {
                 return new Inspector(document.querySelector(".style"));
                 }
             });
+        if (window.innerWidth<600) {
+        update("gridSize", 100);
+        update("speed", 0.3);
+        update("delay", 4.77);
+
+        document.querySelector(".grid-item").style.padding = "100px";
+        document.querySelector(".pic").style.width = "30%"
+        }
         
         </script>
 </body>

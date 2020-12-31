@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "Terminal Grotesque";
+    src: url('/assets/fonts/terminal-grotesque.ttf')  format('truetype')
+}
+body {
+    background-color: black;
+    font-family: "Terminal Grotesque" !important;
+}
+.wrapper {
+    position: relative;
+}
+.page {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
